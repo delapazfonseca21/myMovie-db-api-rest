@@ -1,0 +1,20 @@
+{
+  "name": "mymovie-db-api-rest",
+  "version": "1.0.0",
+  "description": "Un website interactivo para practicar el consumo de API REST con JavaScript, utilizando The Movie DB API. Permite buscar películas, ver detalles como sinopsis, calificación y elenco, y explorar tendencias en tiempo real.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/delapazfonseca21/myMovie-db-api-rest.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/delapazfonseca21/myMovie-db-api-rest/issues"
+  },
+  "homepage": "https://github.com/delapazfonseca21/myMovie-db-api-rest#readme"
+}
