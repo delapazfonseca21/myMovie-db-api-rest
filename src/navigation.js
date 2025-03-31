@@ -17,20 +17,20 @@ window.addEventListener('hashchange', navegador, false);
 function navegador(){
     const ruta = location.hash.substring(1);
 
-    switch(ruta){
-        case 'trends':
+    switch(true){
+        case ruta.startsWith('trends'):
             trendsPage();
         break;
         
-        case 'search=':
+        case ruta.startsWith('search='):
             searchPage();
         break;
 
-        case 'movie=':
+        case ruta.startsWith('movie='):
             moviePage();
         break;
 
-        case 'category=':
+        case ruta.startsWith('category='):
             categoryPage();
         break;
 
@@ -131,8 +131,6 @@ function categoryPage(){
     headerTitle.classList.add('inactive');
     headerCategoryTitle.classList.remove('inactive');
 
-    headerCategoryTitle.textContent = 'Acción';
-
     searchForm.classList.add('inactive');
 
     trendingPreviewSection.classList.add('inactive');
@@ -140,4 +138,13 @@ function categoryPage(){
 
     genericSection.classList.remove('inactive');
     movieDetailSection.classList.add('inactive');
+
+    const [_, categoryData] = location.hash.split('=');
+    const [categoryId, categoryName] = categoryData.split('-');
+    
+    const categoryText = decodeURIComponent(categoryName);
+    
+    headerCategoryTitle.textContent = categoryText;
+
+    getMoviesByCategory(categoryId);
 }

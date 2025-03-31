@@ -48,8 +48,37 @@ async function getTrendingCategories() {
         titulo.setAttribute('id', `id${categoria.id}`);
         titulo.classList.add('category-title');
         titulo.textContent = categoria.name;
+        titulo.addEventListener('click', ()=>{
+            location.hash = `#category=${categoria.id}-${categoria.name}`;
+        })
 
         categoryContainer.appendChild(titulo);
         categoriesPreviewList.appendChild(categoryContainer);
+    });
+}
+
+async function getMoviesByCategory(id){
+    const { data } = await api('/discover/movie', {
+        params: {
+            with_genres: id
+        }
+    });
+
+    const movies = data.results;
+
+    genericSection.innerHTML = '';
+
+    movies.forEach(pelicula => {
+        const contenedorPelicula = document.createElement('div');
+        contenedorPelicula.classList.add('movie-container');
+
+        const img = document.createElement('img');
+        img.classList.add('movie-img');
+        img.src = `https://image.tmdb.org/t/p/w500/${pelicula.poster_path}`;
+        img.alt = pelicula.title;
+
+        contenedorPelicula.appendChild(img);
+
+        genericSection.appendChild(contenedorPelicula);
     });
 }
