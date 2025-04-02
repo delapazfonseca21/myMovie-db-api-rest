@@ -1,9 +1,9 @@
 searchFormBtn.addEventListener('click', ()=>{
-    location.hash = '#search='
+    location.hash = `#search=${searchFormInput.value}`
 });
 
 arrowBtn.addEventListener('click', ()=>{
-    location.hash = '#home'
+    window.history.back();
 });
 
 trendingBtn.addEventListener('click', ()=>{
@@ -16,7 +16,6 @@ window.addEventListener('hashchange', navegador, false);
 
 function navegador(){
     const ruta = location.hash.substring(1);
-
     switch(true){
         case ruta.startsWith('trends'):
             trendsPage();
@@ -38,6 +37,7 @@ function navegador(){
             homePage();
         break;
     }
+    window.scrollTo({ top: 0 });
 }
 
 function homePage(){
@@ -80,6 +80,8 @@ function trendsPage(){
 
     genericSection.classList.remove('inactive');
     movieDetailSection.classList.add('inactive');
+
+    getTrendingMovies()
 }
 
 function searchPage(){
@@ -101,6 +103,10 @@ function searchPage(){
 
     genericSection.classList.remove('inactive');
     movieDetailSection.classList.add('inactive');
+
+    const [_, query] = location.hash.split('=');
+    
+    getMovieSearch(query)
 }
 
 function moviePage(){
@@ -119,6 +125,10 @@ function moviePage(){
 
     genericSection.classList.add('inactive');
     movieDetailSection.classList.remove('inactive');
+
+    const [_, movieId] = location.hash.split('=');
+
+    getMovieById(movieId);
 }
 
 function categoryPage(){
